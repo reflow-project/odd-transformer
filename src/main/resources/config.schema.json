@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://io.piveau/resources/transforming-js/config.schema.json",
+  "title": "transforming-js configuration",
+  "description": "piveau pipe segment config object schema",
+  "type": "object",
+  "oneOf": [
+    {
+      "required": [ "scriptRepository" ]
+    },
+    {
+      "required": [ "script" ]
+    }
+  ],
+  "properties": {
+    "oneOf": {
+      "scriptRepository": {
+        "type": "object",
+        "title": "The repository where the script resides",
+        "required": [ "uri", "script" ],
+        "properties": {
+          "uri": {
+            "type": "string",
+            "format": "uri",
+            "title": "The URI reference to the repository"
+          },
+          "branch": {
+            "type": "string",
+            "title": "The branch to use",
+            "default": "master"
+          },
+          "username": {
+            "type": "string",
+            "title": "The username to authenticate"
+          },
+          "token": {
+            "type": "string",
+            "title": "The authentication token"
+          },
+          "script": {
+            "type": "string",
+            "title": "Path to script file"
+          }
+        }
+      },
+      "script": {
+        "type": "string",
+        "title": "The embedded script"
+      }
+    },
+    "single": {
+      "type": "boolean",
+      "default": false
+    },
+    "params": {
+      "type": "string",
+      "title": "Params as stringified json"
+    },
+    "outputFormat": {
+      "enum": [
+        "application/rdf+xml",
+        "application/n-triples",
+        "application/ld+json",
+        "application/trig",
+        "text/turtle",
+        "text/n3"
+      ],
+      "title": "The output format",
+      "default": "application/n-triples"
+    }
+  }
+}
